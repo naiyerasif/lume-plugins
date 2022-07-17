@@ -40,10 +40,8 @@ export default function (userOptions?: Partial<Options>) {
 			
 				const wordCount = text.trim().split(/\s+/g).length
 				const minutes = wordCount / options.wpm
-			
-				if (minutes < 1) return 1
-			
-				const readingTime = Math.ceil(parseFloat(minutes.toFixed(2)))
+
+				const readingTime = minutes > 1 ? Math.ceil(parseFloat(minutes.toFixed(2))) : 1
 				return isTransformFunction(options['transform']) ? options.transform(readingTime) : readingTime
 			}
 		})
