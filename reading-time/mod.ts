@@ -2,17 +2,29 @@ import { merge } from 'lume/core/utils.ts'
 
 import type { Helper, Site } from 'lume/core.ts'
 
+export type TransformFunction = (readingTime: number) => string
+
 export interface Options {
 	/** Reading speed in words per minute */
 	wpm: number,
 
 	/** Name of the filter */
-	name: string
+	name: string,
+
+	/** Transformation function to generate a readable message */
+	transform?: TransformFunction
 }
 
 export const defaults: Options = {
 	wpm: 250,
-	name: 'readingTime'
+	name: 'readingTime',
+	transform(readingTime) {
+		return `${readingTime} min read`
+	}
+}
+
+function isTransformFunction(fn: unknown): fn is TransformFunction {
+	return (typeof fn === 'function')
 }
 
 /** A plugin to estimate the reading time of raw content */
@@ -23,7 +35,7 @@ export default function (userOptions?: Partial<Options>) {
 		site.addEventListener('beforeBuild', () => {
 			site.filter(options.name, filter as Helper)
 
-			function filter(text: string, userOptions?: Partial<Options>): number {
+			function filter(text: string, userOptions?: Partial<Options>): number | string {
 				const options = merge(defaults, userOptions)
 			
 				const wordCount = text.trim().split(/\s+/g).length
@@ -32,7 +44,7 @@ export default function (userOptions?: Partial<Options>) {
 				if (minutes < 1) return 1
 			
 				const readingTime = Math.ceil(parseFloat(minutes.toFixed(2)))
-				return readingTime
+				return isTransformFunction(options['transform']) ? options.transform(readingTime) : readingTime
 			}
 		})
 	}
