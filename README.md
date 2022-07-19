@@ -14,6 +14,10 @@ Adds `date` and `dateCompare` filters to work with dates
 
 Adds reading time estimates of the raw content (in minutes)
 
+## [Remark](./remark/)
+
+Process markdown with Remark / Rehype plugins
+
 ## License
 
 Licensed under [MIT](./LICENSE.md)
