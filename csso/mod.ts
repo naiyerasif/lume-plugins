@@ -1,5 +1,5 @@
 import { Page } from 'lume/core/filesystem.ts'
-import { minify } from 'https://unpkg.com/csso@5.0.3/dist/csso.esm.js'
+import { minify } from 'https://unpkg.com/csso@5.0.5/dist/csso.esm.js'
 
 import type { Site } from 'lume/core.ts'
 

@@ -1,6 +1,6 @@
-import dayjs from 'https://esm.sh/dayjs@1.11.3'
-import timezone from 'https://esm.sh/v86/dayjs@1.11.3/plugin/timezone'
-import utc from 'https://esm.sh/v86/dayjs@1.11.3/plugin/utc'
+import dayjs from 'https://esm.sh/dayjs@1.11.5'
+import timezone from 'https://esm.sh/v86/dayjs@1.11.5/plugin/timezone'
+import utc from 'https://esm.sh/v86/dayjs@1.11.5/plugin/utc'
 import { merge } from 'lume/core/utils.ts'
 
 import type { Helper, Site } from 'lume/core.ts'
